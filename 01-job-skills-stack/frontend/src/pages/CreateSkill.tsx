@@ -22,7 +22,7 @@ const CreateSkill = () => {
         skillData: { id: Math.random(), name: nameInput },
       })
     );
-    navigate("/");
+    navigate("/jobs/new");
   };
 
   return (

@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Skill } from "../skills/skills.slice";
 
 export type Job = {
   id: number;
   name: string;
+  skills: Skill[];
 };
 
 type JobsState = {

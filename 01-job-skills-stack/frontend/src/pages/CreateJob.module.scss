@@ -1,4 +1,22 @@
 .form-container {
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.form__input {
+  margin: 0.8rem 0;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
 }

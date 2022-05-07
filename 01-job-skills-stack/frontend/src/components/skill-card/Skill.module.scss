@@ -1,0 +1,10 @@
+.skill-card {
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  background-color: rgb(228, 228, 228);
+}
+
+.skill-card--active {
+  background-color: aquamarine;
+}

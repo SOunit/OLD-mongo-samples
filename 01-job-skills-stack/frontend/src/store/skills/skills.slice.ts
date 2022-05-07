@@ -10,7 +10,12 @@ type SkillsState = {
 };
 
 const initialState: SkillsState = {
-  skills: [],
+  // FIXME: delete dummy data
+  skills: [
+    { id: 1, name: "React" },
+    { id: 2, name: "Node" },
+    { id: 3, name: "MongoDB" },
+  ],
 };
 
 type CreateSkillAction = {
