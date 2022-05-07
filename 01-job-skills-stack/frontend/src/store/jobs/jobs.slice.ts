@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type Job = {
+  id: number;
   name: string;
 };
 

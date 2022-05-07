@@ -28,7 +28,9 @@ const CreateJob: FC = () => {
     event.preventDefault();
     console.log("submit", inputs);
 
-    dispatch(jobsActions.createJob({ jobData: { name: nameInput } }));
+    dispatch(
+      jobsActions.createJob({ jobData: { id: Math.random(), name: nameInput } })
+    );
 
     navigate("/");
   };
