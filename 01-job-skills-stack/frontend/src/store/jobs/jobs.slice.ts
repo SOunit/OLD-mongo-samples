@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type Job = {
+export type Job = {
   id: number;
   name: string;
 };

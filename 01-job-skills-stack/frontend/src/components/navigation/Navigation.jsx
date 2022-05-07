@@ -8,6 +8,7 @@ const Navigation = () => {
         <Link to={"/"}>TOP</Link>
         <Link to={"/jobs"}>JOB LIST</Link>
         <Link to={"/jobs/new"}>CREATE JOB</Link>
+        <Link to={"/skills/new"}>CREATE SKILL</Link>
       </div>
       <Outlet />
     </>

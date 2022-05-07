@@ -1,13 +1,15 @@
 import { useSelector } from "react-redux";
+import JobCard from "../components/job-card/JobCard";
 import { RootState } from "../store";
+import classes from "./JobList.module.scss";
 
 const JobList = () => {
   const jobs = useSelector((state: RootState) => state.jobs.jobs);
 
   return (
-    <div>
+    <div className={classes["jobs-container"]}>
       {jobs.map((job) => (
-        <div key={job.id}>{job.name}</div>
+        <JobCard key={job.id} job={job} />
       ))}
     </div>
   );
