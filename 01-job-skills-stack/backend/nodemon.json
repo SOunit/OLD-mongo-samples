@@ -1,0 +1,8 @@
+{
+  "env": {
+    "DB_USER": "the_mern_stack_user",
+    "DB_PASSWORD": "YuTLjrQaTST7K2bT",
+    "DB_NAME": "skillStackSample",
+    "JWT_SECRET_KEY": "supersecret_dont_share_with_anyone"
+  }
+}
