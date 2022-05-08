@@ -1,4 +1,4 @@
-import { FC, FormEventHandler, useState } from "react";
+import { ChangeEventHandler, FC, FormEventHandler, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SelectableSkillCard from "../components/selectable-skill-card/SelectableSkillCard";
@@ -41,6 +41,10 @@ const CreateJob: FC = () => {
     navigate("/");
   };
 
+  const nameChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setInputs((prevState) => ({ ...prevState, nameInput: event.target.value }));
+  };
+
   const toggleSkillHandler = (skillToToggle: Skill) => {
     if (selectedSkillsMap[skillToToggle.id]) {
       // delete skill
@@ -67,7 +71,11 @@ const CreateJob: FC = () => {
     <div className={classes["form-container"]}>
       <form onSubmit={submitHandler} className={classes["form"]}>
         <label>Job Name</label>
-        <input className={classes["form__input"]} />
+        <input
+          className={classes["form__input"]}
+          onChange={nameChangeHandler}
+          value={nameInput}
+        />
         <div className={classes["skills-container"]}>
           {skills.map((skill) => (
             <SelectableSkillCard
