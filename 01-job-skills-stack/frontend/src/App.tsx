@@ -5,6 +5,7 @@ import CreateJob from "./pages/CreateJob";
 import JobList from "./pages/JobList";
 import CreateSkill from "./pages/CreateSkill";
 import Statistics from "./pages/Statistics";
+import SkillList from "./pages/SkillList";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="jobs" element={<JobList />} />
         <Route path="jobs/new" element={<CreateJob />} />
         <Route path="skills/new" element={<CreateSkill />} />
+        <Route path="skills" element={<SkillList />} />
         <Route path="skills/statistics/:skillId" element={<Statistics />} />
       </Route>
     </Routes>
