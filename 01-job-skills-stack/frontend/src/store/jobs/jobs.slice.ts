@@ -12,7 +12,18 @@ type JobsState = {
 };
 
 const initialState: JobsState = {
-  jobs: [],
+  jobs: [
+    { id: 1, name: "react job", skills: [{ id: 1, name: "react" }] },
+    { id: 2, name: "node job", skills: [{ id: 2, name: "node" }] },
+    {
+      id: 3,
+      name: "MongoDB job",
+      skills: [
+        { id: 3, name: "mongodb" },
+        { id: 4, name: "docker" },
+      ],
+    },
+  ],
 };
 
 type CreateJobAction = {

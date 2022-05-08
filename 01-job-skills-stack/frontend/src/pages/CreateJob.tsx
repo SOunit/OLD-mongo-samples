@@ -1,7 +1,7 @@
 import { FC, FormEventHandler, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import SkillCard from "../components/skill-card/SkillCard";
+import SelectableSkillCard from "../components/selectable-skill-card/SelectableSkillCard";
 import { RootState } from "../store";
 import { jobsActions } from "../store/jobs/jobs.slice";
 import { Skill } from "../store/skills/skills.slice";
@@ -25,8 +25,6 @@ const CreateJob: FC = () => {
   const [inputs, setInputs] = useState(INITIAL_INPUTS_STATE);
   const { nameInput, selectedSkillsMap } = inputs;
   const skills = useSelector((state: RootState) => state.skills.skills);
-
-  console.log("selectedSkillsMap", selectedSkillsMap);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,7 +70,7 @@ const CreateJob: FC = () => {
         <input className={classes["form__input"]} />
         <div className={classes["skills-container"]}>
           {skills.map((skill) => (
-            <SkillCard
+            <SelectableSkillCard
               key={skill.id}
               skill={skill}
               onClick={toggleSkillHandler}

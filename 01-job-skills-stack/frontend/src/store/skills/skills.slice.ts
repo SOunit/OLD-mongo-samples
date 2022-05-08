@@ -15,6 +15,7 @@ const initialState: SkillsState = {
     { id: 1, name: "React" },
     { id: 2, name: "Node" },
     { id: 3, name: "MongoDB" },
+    { id: 4, name: "docker" },
   ],
 };
 
