@@ -14,7 +14,7 @@ function App() {
         <Route path="jobs" element={<JobList />} />
         <Route path="jobs/new" element={<CreateJob />} />
         <Route path="skills/new" element={<CreateSkill />} />
-        <Route path="skills/statistics" element={<Statistics />} />
+        <Route path="skills/statistics/:skillId" element={<Statistics />} />
       </Route>
     </Routes>
   );

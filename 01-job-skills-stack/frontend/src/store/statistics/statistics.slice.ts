@@ -6,10 +6,13 @@ type SubSkill = {
   count: number;
 };
 
-type Statistics = {
-  id: number;
+type StatisticsData = {
   primarySkill: Skill;
   subSkills: SubSkill[];
+};
+
+type Statistics = {
+  [key: string]: StatisticsData;
 };
 
 type StatisticsState = {
@@ -18,21 +21,33 @@ type StatisticsState = {
 
 const initialState: StatisticsState = {
   statistics: {
-    id: 1,
-    primarySkill: { id: 1, name: "React" },
-    subSkills: [
-      { count: 5, skill: { id: 2, name: "Node" } },
-      { count: 3, skill: { id: 3, name: "MongoDB" } },
-      { count: 1, skill: { id: 4, name: "Docker" } },
-    ],
+    1: {
+      primarySkill: { id: 1, name: "React" },
+      subSkills: [
+        { count: 5, skill: { id: 2, name: "Node" } },
+        { count: 3, skill: { id: 3, name: "MongoDB" } },
+        { count: 1, skill: { id: 4, name: "Docker" } },
+      ],
+    },
   },
+};
+
+export type AddSkillAction = {
+  type: string;
+  payload: {
+    skillToAdd: Skill;
+  };
 };
 
 const StatisticsSlice = createSlice({
   name: "statistics",
   initialState,
   reducers: {
-    addSkill() {},
+    addSkill(state, action: AddSkillAction) {
+      const { skillToAdd } = action.payload;
+      if (state.statistics) {
+      }
+    },
     removeSkill() {},
   },
 });
