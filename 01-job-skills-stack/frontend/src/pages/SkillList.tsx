@@ -12,8 +12,8 @@ const SkillList = () => {
       <h1 className={classes["title"]}>Select Skill</h1>
       <div className={classes["skill-cards-container"]}>
         {skills.map((skill) => (
-          <Link to={`/skills/statistics/${skill.id}`}>
-            <SkillCard key={skill.id} isActive={true} skill={skill} />
+          <Link to={`/skills/statistics/${skill.id}`} key={skill.id}>
+            <SkillCard isActive={true} skill={skill} />
           </Link>
         ))}
       </div>
