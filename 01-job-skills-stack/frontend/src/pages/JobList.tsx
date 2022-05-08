@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import JobCard from "../components/job-card/JobCard";
 import { RootState } from "../store";
 import classes from "./JobList.module.scss";
@@ -9,7 +10,9 @@ const JobList = () => {
   return (
     <div className={classes["jobs-container"]}>
       {jobs.map((job) => (
-        <JobCard key={job.id} job={job} />
+        <Link key={job.id} to={`/jobs/${job.id}`}>
+          <JobCard job={job} />
+        </Link>
       ))}
     </div>
   );
