@@ -1,0 +1,13 @@
+{
+  "id": "1",
+  "primarySkillId": "1",
+  "subSkillIds": [
+    { "id": "2", "count": "5" },
+    { "id": "2", "count": "5" },
+    { "id": "2", "count": "5" },
+    { "id": "2", "count": "5" },
+    { "id": "2", "count": "5" },
+    { "id": "2", "count": "5" },
+    { "id": "2", "count": "5" }
+  ]
+}
