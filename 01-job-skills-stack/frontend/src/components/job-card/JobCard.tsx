@@ -13,9 +13,12 @@ const JobCard: FC<Props> = (props) => {
     <div className={classes["job-card"]}>
       {job.name}
       <div className={classes["job-card__skills-container"]}>
-        {job.skills.map((skill) => (
-          <SkillCard key={skill.id} skill={skill} isActive />
-        ))}
+        {Object.keys(job.skillsMap).map((key) => {
+          const skill = job.skillsMap[key];
+          return skill ? (
+            <SkillCard key={skill.id} skill={skill} isActive />
+          ) : null;
+        })}
       </div>
     </div>
   );

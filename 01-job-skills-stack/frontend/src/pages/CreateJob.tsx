@@ -3,17 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SelectableSkillCard from "../components/selectable-skill-card/SelectableSkillCard";
 import { RootState } from "../store";
-import { jobsActions } from "../store/jobs/jobs.slice";
+import { jobsActions, SkillsMap } from "../store/jobs/jobs.slice";
 import { Skill } from "../store/skills/skills.slice";
 import classes from "./CreateJob.module.scss";
 
-type SelectedSkillsMap = {
-  [key: string]: Skill | null;
-};
-
 type InitialState = {
   nameInput: string;
-  selectedSkillsMap: SelectedSkillsMap;
+  selectedSkillsMap: SkillsMap;
 };
 
 const INITIAL_INPUTS_STATE: InitialState = {
@@ -34,7 +30,11 @@ const CreateJob: FC = () => {
 
     dispatch(
       jobsActions.createJob({
-        jobData: { id: Math.random(), name: nameInput, skills },
+        jobData: {
+          id: Math.random(),
+          name: nameInput,
+          skillsMap: selectedSkillsMap,
+        },
       })
     );
 

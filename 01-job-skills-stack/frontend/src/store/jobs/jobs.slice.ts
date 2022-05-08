@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Skill } from "../skills/skills.slice";
 
+export type SkillsMap = { [key: string]: Skill | null };
+
 export type Job = {
   id: number;
   name: string;
-  skills: Skill[];
+  skillsMap: SkillsMap;
 };
 
 type JobsState = {
@@ -13,15 +15,15 @@ type JobsState = {
 
 const initialState: JobsState = {
   jobs: [
-    { id: 1, name: "react job", skills: [{ id: 1, name: "react" }] },
-    { id: 2, name: "node job", skills: [{ id: 2, name: "node" }] },
+    { id: 1, name: "react job", skillsMap: { 1: { id: 1, name: "react" } } },
+    { id: 2, name: "node job", skillsMap: { 2: { id: 2, name: "node" } } },
     {
       id: 3,
       name: "MongoDB job",
-      skills: [
-        { id: 3, name: "mongodb" },
-        { id: 4, name: "docker" },
-      ],
+      skillsMap: {
+        3: { id: 3, name: "mongodb" },
+        4: { id: 4, name: "docker" },
+      },
     },
   ],
 };
