@@ -24,13 +24,15 @@ const Statistics = () => {
       <div className={classes["chart-container"]}>
         <Bar
           data={{
-            labels: statistics[skillId].subSkills.map(
-              (elem) => elem.skill.name
+            labels: Object.keys(statistics[skillId].subSkillsMap).map(
+              (key) => statistics[skillId].subSkillsMap[key].skill.name
             ),
             datasets: [
               {
                 label: "Related Skills",
-                data: statistics[skillId].subSkills.map((elem) => elem.count),
+                data: Object.keys(statistics[skillId].subSkillsMap).map(
+                  (key) => statistics[skillId].subSkillsMap[key].count
+                ),
                 backgroundColor: "pink",
               },
             ],
