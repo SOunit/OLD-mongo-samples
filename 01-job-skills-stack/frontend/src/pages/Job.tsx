@@ -1,13 +1,16 @@
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button/Button";
 import SkillCard from "../components/skill-card/SkillCard";
 import { RootState } from "../store";
+import { jobsActions } from "../store/jobs/jobs.slice";
 import classes from "./Job.module.scss";
 
 const Job = () => {
   const { jobId } = useParams();
   const jobs = useSelector((state: RootState) => state.jobs.jobs);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (!jobId) {
     return <div>Data not found</div>;
@@ -19,6 +22,12 @@ const Job = () => {
     return <div>Data not found</div>;
   }
 
+  const deleteJobHandler = () => {
+    dispatch(jobsActions.deleteJob({ jobId: +jobId }));
+
+    navigate("/");
+  };
+
   return (
     <div className={classes["job"]}>
       <h1>{job.name}</h1>
@@ -29,7 +38,7 @@ const Job = () => {
         })}
       </div>
       <div className={classes["button-container"]}>
-        <Button>Delete</Button>
+        <Button onClick={deleteJobHandler}>Delete</Button>
       </div>
     </div>
   );

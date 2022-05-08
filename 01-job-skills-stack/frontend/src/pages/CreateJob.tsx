@@ -1,6 +1,7 @@
 import { ChangeEventHandler, FC, FormEventHandler, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button/Button";
 import SelectableSkillCard from "../components/selectable-skill-card/SelectableSkillCard";
 import { RootState } from "../store";
 import { jobsActions, SkillsMap } from "../store/jobs/jobs.slice";
@@ -91,7 +92,7 @@ const CreateJob: FC = () => {
             />
           ))}
         </div>
-        <button>Create Job</button>
+        <Button>Create Job</Button>
       </form>
     </div>
   );

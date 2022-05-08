@@ -35,6 +35,13 @@ type CreateJobAction = {
   };
 };
 
+type DeleteJobAction = {
+  type: string;
+  payload: {
+    jobId: number;
+  };
+};
+
 const jobsSlice = createSlice({
   name: "jobs",
   initialState,
@@ -42,6 +49,10 @@ const jobsSlice = createSlice({
     createJob(state, action: CreateJobAction) {
       const { jobData } = action.payload;
       state.jobs.push(jobData);
+    },
+    deleteJob(state, action: DeleteJobAction) {
+      const { jobId } = action.payload;
+      state.jobs = state.jobs.filter((job) => job.id !== +jobId);
     },
   },
 });

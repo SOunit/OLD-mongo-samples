@@ -1,4 +1,5 @@
 import { ChangeEventHandler, FC, FormEventHandler } from "react";
+import Button from "../Button/Button";
 import classes from "./Form.module.scss";
 
 export type FormInputsState = {
@@ -51,7 +52,7 @@ const Form: FC<Props> = (props) => {
         />
       ))}
 
-      <button>{submitButtonText}</button>
+      <Button>{submitButtonText}</Button>
     </form>
   );
 };
