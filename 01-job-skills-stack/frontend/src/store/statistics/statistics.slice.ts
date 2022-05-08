@@ -21,22 +21,20 @@ type StatisticsState = {
 };
 
 const initialState: StatisticsState = {
-  statistics: {
-    1: {
-      primarySkill: { id: 1, name: "React" },
-      subSkillsMap: {
-        2: { count: 5, skill: { id: 2, name: "Node" } },
-        3: { count: 3, skill: { id: 3, name: "MongoDB" } },
-        4: { count: 1, skill: { id: 4, name: "Docker" } },
-      },
-    },
-  },
+  statistics: {},
 };
 
-export type AddSkillAction = {
+type AddSkillAction = {
   type: string;
   payload: {
     skillsMapToAdd: SkillsMap;
+  };
+};
+
+type RemoveSkillAction = {
+  type: string;
+  payload: {
+    skillsMapToRemove: SkillsMap;
   };
 };
 
@@ -59,36 +57,43 @@ const StatisticsSlice = createSlice({
       });
 
       // loop on primary key
-      Object.keys(state.statistics).forEach((statisticsId) => {
-        console.log(statisticsId);
-        Object.keys(skillsMapToAdd).forEach((skillId) => {
-          console.log(skillId);
-          const skillToAdd = skillsMapToAdd[skillId];
-          const targetStatistics = state.statistics[statisticsId];
-          const targetSubSkill = targetStatistics.subSkillsMap[skillId];
-
-          if (
-            !skillToAdd ||
-            targetStatistics.primarySkill.id === skillToAdd.id
-          ) {
+      Object.keys(skillsMapToAdd).forEach((primarySkillId) => {
+        Object.keys(skillsMapToAdd).forEach((skillIdToAdd) => {
+          if (primarySkillId === skillIdToAdd) {
             return;
           }
 
-          // update sub skill
-          if (targetSubSkill) {
-            // count up
-            targetSubSkill.count++;
+          // update
+          const targetSkillMap = state.statistics[primarySkillId].subSkillsMap;
+
+          if (targetSkillMap[skillIdToAdd]) {
+            targetSkillMap[skillIdToAdd].count++;
           } else {
-            // create
-            targetStatistics.subSkillsMap[skillId] = {
+            targetSkillMap[skillIdToAdd] = {
               count: 1,
-              skill: skillToAdd,
+              skill: skillsMapToAdd[skillIdToAdd]!,
             };
           }
         });
       });
     },
-    removeSkill() {},
+    removeSkill(state, action: RemoveSkillAction) {
+      const { skillsMapToRemove } = action.payload;
+
+      Object.keys(skillsMapToRemove).forEach((primarySkillId) => {
+        const targetStatistics = state.statistics[primarySkillId];
+
+        Object.keys(skillsMapToRemove).forEach((subSkillId) => {
+          if (primarySkillId !== subSkillId) {
+            const targetSubSkill = targetStatistics.subSkillsMap[subSkillId];
+            targetSubSkill.count--;
+            if (targetSubSkill.count < 0) {
+              targetSubSkill.count = 0;
+            }
+          }
+        });
+      });
+    },
   },
 });
 

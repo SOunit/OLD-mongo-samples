@@ -7,8 +7,11 @@ import CreateSkill from "./pages/CreateSkill";
 import Statistics from "./pages/Statistics";
 import SkillList from "./pages/SkillList";
 import Job from "./pages/Job";
+import { useSetupData } from "./utils/setup-data";
 
 function App() {
+  useSetupData();
+
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>

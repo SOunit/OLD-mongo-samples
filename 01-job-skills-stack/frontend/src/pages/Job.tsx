@@ -4,6 +4,7 @@ import Button from "../components/Button/Button";
 import SkillCard from "../components/skill-card/SkillCard";
 import { RootState } from "../store";
 import { jobsActions } from "../store/jobs/jobs.slice";
+import { statisticsActions } from "../store/statistics/statistics.slice";
 import classes from "./Job.module.scss";
 
 const Job = () => {
@@ -24,6 +25,9 @@ const Job = () => {
 
   const deleteJobHandler = () => {
     dispatch(jobsActions.deleteJob({ jobId: +jobId }));
+    dispatch(
+      statisticsActions.removeSkill({ skillsMapToRemove: job.skillsMap })
+    );
 
     navigate("/");
   };
