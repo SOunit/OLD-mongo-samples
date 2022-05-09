@@ -12,7 +12,7 @@ const SkillList = () => {
       <h1 className={classes["title"]}>Select Skill</h1>
       <div className={classes["skill-cards-container"]}>
         {skills.map((skill) => (
-          <Link to={`/skills/statistics/${skill.id}`} key={skill.id}>
+          <Link to={`/skills/statistics/${skill._id}`} key={skill._id}>
             <SkillCard isActive={true} skill={skill} />
           </Link>
         ))}

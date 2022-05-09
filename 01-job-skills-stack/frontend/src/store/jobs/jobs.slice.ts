@@ -4,7 +4,7 @@ import { Skill } from "../skills/skills.slice";
 export type SkillsMap = { [key: string]: Skill | null };
 
 export type Job = {
-  id: number;
+  _id: string;
   name: string;
   skillsMap: SkillsMap;
 };
@@ -27,7 +27,7 @@ type CreateJobAction = {
 type DeleteJobAction = {
   type: string;
   payload: {
-    jobId: number;
+    jobId: string;
   };
 };
 
@@ -41,7 +41,7 @@ const jobsSlice = createSlice({
     },
     deleteJob(state, action: DeleteJobAction) {
       const { jobId } = action.payload;
-      state.jobs = state.jobs.filter((job) => job.id !== +jobId);
+      state.jobs = state.jobs.filter((job) => job._id !== jobId);
     },
   },
 });

@@ -19,7 +19,7 @@ const CreateSkill = () => {
   const { nameInput } = inputs;
 
   const onSubmit = async () => {
-    await dispatch(createSkill({ id: Math.random(), name: nameInput }));
+    await dispatch(createSkill({ name: nameInput }));
 
     navigate("/jobs/new");
   };

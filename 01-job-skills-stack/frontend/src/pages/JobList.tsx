@@ -10,7 +10,7 @@ const JobList = () => {
   return (
     <div className={classes["jobs-container"]}>
       {jobs.map((job) => (
-        <Link key={job.id} to={`/jobs/${job.id}`}>
+        <Link key={job._id} to={`/jobs/${job._id}`}>
           <JobCard job={job} />
         </Link>
       ))}

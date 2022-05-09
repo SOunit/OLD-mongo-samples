@@ -33,7 +33,7 @@ const CreateJob: FC = () => {
     dispatch(
       jobsActions.createJob({
         jobData: {
-          id: Math.random(),
+          _id: Math.random().toString(),
           name: nameInput,
           skillsMap: selectedSkillsMap,
         },
@@ -52,10 +52,10 @@ const CreateJob: FC = () => {
   };
 
   const toggleSkillHandler = (skillToToggle: Skill) => {
-    if (selectedSkillsMap[skillToToggle.id]) {
+    if (selectedSkillsMap[skillToToggle._id!]) {
       // delete skill
       const newSelectedSkillsMap = { ...selectedSkillsMap };
-      newSelectedSkillsMap[skillToToggle.id] = null;
+      newSelectedSkillsMap[skillToToggle._id!] = null;
       setInputs((prevState) => ({
         ...prevState,
         selectedSkillsMap: newSelectedSkillsMap,
@@ -64,7 +64,7 @@ const CreateJob: FC = () => {
       // add skill
       const newSelectedSkillsMap = {
         ...selectedSkillsMap,
-        [skillToToggle.id]: skillToToggle,
+        [skillToToggle._id!]: skillToToggle,
       };
       setInputs((prevState) => ({
         ...prevState,
@@ -85,10 +85,10 @@ const CreateJob: FC = () => {
         <div className={classes["skills-container"]}>
           {skills.map((skill) => (
             <SelectableSkillCard
-              key={skill.id}
+              key={skill._id}
               skill={skill}
               onClick={toggleSkillHandler}
-              isActive={!!selectedSkillsMap[skill.id]}
+              isActive={!!selectedSkillsMap[skill._id!]}
             />
           ))}
         </div>

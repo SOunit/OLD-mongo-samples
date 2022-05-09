@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type Skill = {
-  id: number;
+  _id?: string;
   name: string;
 };
 
@@ -12,10 +12,10 @@ type SkillsState = {
 const initialState: SkillsState = {
   // FIXME: delete dummy data
   skills: [
-    { id: 1, name: "React" },
-    { id: 2, name: "Node" },
-    { id: 3, name: "MongoDB" },
-    { id: 4, name: "docker" },
+    { _id: "1", name: "React" },
+    { _id: "2", name: "Node" },
+    { _id: "3", name: "MongoDB" },
+    { _id: "4", name: "docker" },
   ],
 };
 

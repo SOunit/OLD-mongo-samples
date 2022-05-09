@@ -17,14 +17,14 @@ const Job = () => {
     return <div>Data not found</div>;
   }
 
-  const job = jobs.find((job) => job.id === +jobId);
+  const job = jobs.find((job) => job._id === jobId);
 
   if (!job) {
     return <div>Data not found</div>;
   }
 
   const deleteJobHandler = () => {
-    dispatch(jobsActions.deleteJob({ jobId: +jobId }));
+    dispatch(jobsActions.deleteJob({ jobId: jobId }));
     dispatch(
       statisticsActions.removeSkill({ skillsMapToRemove: job.skillsMap })
     );
@@ -38,7 +38,7 @@ const Job = () => {
       <div className={classes["skills-container"]}>
         {Object.keys(job.skillsMap).map((key) => {
           const skill = job.skillsMap[key];
-          return skill && <SkillCard isActive skill={skill} key={skill.id} />;
+          return skill && <SkillCard isActive skill={skill} key={skill._id} />;
         })}
       </div>
       <div className={classes["button-container"]}>

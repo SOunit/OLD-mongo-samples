@@ -16,11 +16,27 @@ const createSkill = async (req: Request, res: Response, _: NextFunction) => {
       throw new Error(`${skill.name} already exists!`);
     }
 
-    const response = await db.getDb().collection("skills").insertOne(skill);
+    const createResponse = await db
+      .getDb()
+      .collection("skills")
+      .insertOne(skill);
 
-    response
-      ? res.status(201).json({ message: "created a new skill", response })
-      : res.status(500).json({ message: "Failed to create a new skill" });
+    if (!createResponse) {
+      res.status(500).json({ message: "Failed to create a new skill" });
+    }
+
+    const { insertedId } = createResponse;
+
+    const createdSkill = await db
+      .getDb()
+      .collection("skills")
+      .findOne({ _id: new ObjectId(insertedId) });
+
+    createdSkill
+      ? res.status(201).json({
+          skill: createdSkill,
+        })
+      : res.status(500).json({ message: "Failed to fetch a new skill" });
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }

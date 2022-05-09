@@ -16,7 +16,7 @@ const JobCard: FC<Props> = (props) => {
         {Object.keys(job.skillsMap).map((key) => {
           const skill = job.skillsMap[key];
           return skill ? (
-            <SkillCard key={skill.id} skill={skill} isActive />
+            <SkillCard key={skill._id} skill={skill} isActive />
           ) : null;
         })}
       </div>
