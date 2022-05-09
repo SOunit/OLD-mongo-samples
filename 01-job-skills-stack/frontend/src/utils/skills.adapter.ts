@@ -30,9 +30,9 @@ const getSkills = async (): Promise<Skill[]> => {
   return skills;
 };
 
-const db = {
+const skillsAdapter = {
   createSkill,
   getSkills,
 };
 
-export default db;
+export default skillsAdapter;

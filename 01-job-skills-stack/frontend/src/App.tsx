@@ -9,7 +9,7 @@ import SkillList from "./pages/SkillList";
 import Job from "./pages/Job";
 import { useEffect } from "react";
 // import { useSetupData } from "./utils/setup-data";
-import db from "./utils/db";
+import skillsAdapter from "./utils/skills.adapter";
 import { useDispatch } from "react-redux";
 import { skillsActions } from "./store/skills/skills.slice";
 
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     const initSkills = async () => {
-      const skills = await db.getSkills();
+      const skills = await skillsAdapter.getSkills();
       dispatch(skillsActions.setSkills({ skills }));
     };
 
