@@ -83,14 +83,15 @@ const CreateJob: FC = () => {
           value={nameInput}
         />
         <div className={classes["skills-container"]}>
-          {skills.map((skill) => (
-            <SelectableSkillCard
-              key={skill._id}
-              skill={skill}
-              onClick={toggleSkillHandler}
-              isActive={!!selectedSkillsMap[skill._id!]}
-            />
-          ))}
+          {skills &&
+            skills.map((skill) => (
+              <SelectableSkillCard
+                key={skill._id}
+                skill={skill}
+                onClick={toggleSkillHandler}
+                isActive={!!selectedSkillsMap[skill._id!]}
+              />
+            ))}
         </div>
         <Button>Create Job</Button>
       </form>

@@ -18,10 +18,20 @@ type CreateSkillAction = {
   payload: { skillData: Skill };
 };
 
+type SetSkillsAction = {
+  type: string;
+  payload: { skills: Skill[] };
+};
+
 const skillsSlice = createSlice({
   name: "skills",
   initialState,
   reducers: {
+    setSkills(state, action: SetSkillsAction) {
+      const { skills } = action.payload;
+
+      state.skills = skills;
+    },
     addSkill(state, action: CreateSkillAction) {
       const { skillData } = action.payload;
       state.skills.push(skillData);

@@ -12,7 +12,6 @@ const createSkill = async (skillData: SkillData): Promise<Skill> => {
   );
 
   const skill = createResponse.data.skill;
-  console.log(skill);
 
   return skill;
 };
@@ -22,7 +21,11 @@ const getSkills = async (): Promise<Skill[]> => {
     `${process.env.REACT_APP_BACKEND_URL}/skills`
   );
 
-  const skills = getResponse.data.skills;
+  console.log(getResponse);
+
+  const skills = getResponse.data;
+
+  console.log("getSkills", skills);
 
   return skills;
 };
