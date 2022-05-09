@@ -17,8 +17,19 @@ const createSkill = async (skillData: SkillData): Promise<Skill> => {
   return skill;
 };
 
+const getSkills = async (): Promise<Skill[]> => {
+  const getResponse = await axios.get(
+    `${process.env.REACT_APP_BACKEND_URL}/skills`
+  );
+
+  const skills = getResponse.data.skills;
+
+  return skills;
+};
+
 const db = {
   createSkill,
+  getSkills,
 };
 
 export default db;
