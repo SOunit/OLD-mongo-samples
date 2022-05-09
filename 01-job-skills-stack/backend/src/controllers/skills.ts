@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import db from "../db";
 
-const createSkill = async (req: Request, res: Response, next: NextFunction) => {
+// https://www.mongodb.com/compatibility/using-typescript-with-mongodb-tutorial
+const createSkill = async (req: Request, res: Response, _: NextFunction) => {
   const { skill } = req.body;
 
   try {
@@ -16,4 +17,10 @@ const createSkill = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default { createSkill };
+const getSkills = async (req: Request, res: Response, _: NextFunction) => {
+  const skills = await db.getDb().collection("skills").find({}).toArray();
+
+  res.status(200).json(skills);
+};
+
+export default { createSkill, getSkills };
