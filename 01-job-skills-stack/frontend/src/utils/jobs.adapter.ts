@@ -12,6 +12,16 @@ const createJob = async (jobData: Job): Promise<Job> => {
   return job;
 };
 
-const jobsAdapter = { createJob };
+const getJobs = async (): Promise<Job[]> => {
+  const getResponse = await axios.get(
+    `${process.env.REACT_APP_BACKEND_URL}/jobs`
+  );
+
+  const jobs = getResponse.data;
+
+  return jobs;
+};
+
+const jobsAdapter = { createJob, getJobs };
 
 export default jobsAdapter;

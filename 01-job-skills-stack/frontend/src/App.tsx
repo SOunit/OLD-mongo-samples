@@ -12,6 +12,8 @@ import { useEffect } from "react";
 import skillsAdapter from "./utils/skills.adapter";
 import { useDispatch } from "react-redux";
 import { skillsActions } from "./store/skills/skills.slice";
+import jobsAdapter from "./utils/jobs.adapter";
+import { jobsActions } from "./store/jobs/jobs.slice";
 
 function App() {
   // useSetupData();
@@ -25,6 +27,15 @@ function App() {
 
     initSkills();
   }, [dispatch]);
+
+  useEffect(() => {
+    const initJobs = async () => {
+      const jobs = await jobsAdapter.getJobs();
+      dispatch(jobsActions.setJobs(jobs));
+    };
+
+    initJobs();
+  });
 
   return (
     <Routes>

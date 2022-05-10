@@ -31,10 +31,19 @@ type DeleteJobAction = {
   };
 };
 
+type SetJobsAction = {
+  type: string;
+  payload: Job[];
+};
+
 const jobsSlice = createSlice({
   name: "jobs",
   initialState,
   reducers: {
+    setJobs(state, action: SetJobsAction) {
+      const jobs = action.payload;
+      state.jobs = jobs;
+    },
     createJob(state, action: CreateJobAction) {
       const { jobData } = action.payload;
       state.jobs.push(jobData);
