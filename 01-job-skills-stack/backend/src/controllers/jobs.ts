@@ -29,4 +29,9 @@ const createJob = async (req: Request, res: Response) => {
   }
 };
 
-export default { createJob };
+const getJobs = async (req: Request, res: Response) => {
+  const jobs = await db.getDb().collection("jobs").find({}).toArray();
+  res.status(200).json(jobs);
+};
+
+export default { createJob, getJobs };
