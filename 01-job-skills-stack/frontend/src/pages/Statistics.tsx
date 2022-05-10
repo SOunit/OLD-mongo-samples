@@ -1,18 +1,27 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, TypedDispatch } from "../store";
 import { Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import classes from "./Statistics.module.scss";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { fetchStatistics } from "../store/statistics/statistics.action";
 
 Chart.register(...registerables);
 
 const Statistics = () => {
   const { skillId } = useParams();
+  const dispatch = useDispatch<TypedDispatch>();
 
   const statistics = useSelector(
     (state: RootState) => state.statistics.statistics
   );
+
+  useEffect(() => {
+    if (skillId) {
+      dispatch(fetchStatistics(skillId));
+    }
+  }, [dispatch, skillId]);
 
   if (!(skillId && statistics)) {
     return <div>No data found!</div>;

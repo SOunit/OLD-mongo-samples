@@ -6,8 +6,8 @@ import SelectableSkillCard from "../components/selectable-skill-card/SelectableS
 import { RootState, TypedDispatch } from "../store";
 import { jobsActions, SkillsMap } from "../store/jobs/jobs.slice";
 import { Skill } from "../store/skills/skills.slice";
-import { addSkills } from "../store/statistics/statistics.action";
 import jobsAdapter from "../utils/jobs.adapter";
+import statisticsAdapter from "../utils/statistics.adapter";
 import classes from "./CreateJob.module.scss";
 
 type InitialState = {
@@ -39,7 +39,7 @@ const CreateJob: FC = () => {
       })
     );
 
-    dispatch(addSkills(selectedSkillsMap));
+    await statisticsAdapter.addSkillsToStatistics(selectedSkillsMap);
 
     navigate("/");
   };

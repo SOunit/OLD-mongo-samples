@@ -32,7 +32,7 @@ type RemoveSkillAction = {
 
 type SetStatisticsAction = {
   type: string;
-  payload: { statistics: Statistics };
+  payload: Statistics;
 };
 
 const StatisticsSlice = createSlice({
@@ -40,7 +40,7 @@ const StatisticsSlice = createSlice({
   initialState,
   reducers: {
     setStatistics(state, action: SetStatisticsAction) {
-      state.statistics = action.payload.statistics;
+      state.statistics = action.payload;
     },
     removeSkill(state, action: RemoveSkillAction) {
       const { skillsMapToRemove } = action.payload;
