@@ -14,24 +14,24 @@ const Statistics = () => {
     (state: RootState) => state.statistics.statistics
   );
 
-  if (!(skillId && statistics[skillId])) {
+  if (!(skillId && statistics)) {
     return <div>No data found!</div>;
   }
 
   return (
     <div className={classes["statistics"]}>
-      <h1>{statistics[skillId].primarySkill.name}</h1>
+      <h1>{statistics.primarySkill.name}</h1>
       <div className={classes["chart-container"]}>
         <Bar
           data={{
-            labels: Object.keys(statistics[skillId].subSkillsMap).map(
-              (key) => statistics[skillId].subSkillsMap[key].skill.name
+            labels: Object.keys(statistics.subSkillsMap).map(
+              (key) => statistics.subSkillsMap[key].skill.name
             ),
             datasets: [
               {
                 label: "Related Skills",
-                data: Object.keys(statistics[skillId].subSkillsMap).map(
-                  (key) => statistics[skillId].subSkillsMap[key].count
+                data: Object.keys(statistics.subSkillsMap).map(
+                  (key) => statistics.subSkillsMap[key].count
                 ),
                 backgroundColor: "pink",
               },

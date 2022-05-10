@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { TypedDispatch } from "../store";
 import { Job, jobsActions } from "../store/jobs/jobs.slice";
-import { statisticsActions } from "../store/statistics/statistics.slice";
+import { addSkills } from "../store/statistics/statistics.action";
 
 const DUMMY_DATA_LIST: Job[] = [
   {
@@ -25,7 +26,7 @@ const DUMMY_DATA_LIST: Job[] = [
 ];
 
 export const useSetupData = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<TypedDispatch>();
 
   useEffect(() => {
     DUMMY_DATA_LIST.forEach((jobData) => {
@@ -34,9 +35,7 @@ export const useSetupData = () => {
           jobData: { ...jobData, _id: Math.random().toString() },
         })
       );
-      dispatch(
-        statisticsActions.addSkills({ skillsMapToAdd: jobData.skillsMap })
-      );
+      dispatch(addSkills(jobData.skillsMap));
     });
   }, [dispatch]);
 };
