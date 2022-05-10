@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/button/Button";
 import SelectableSkillCard from "../components/selectable-skill-card/SelectableSkillCard";
-import { RootState } from "../store";
+import { RootState, TypedDispatch } from "../store";
 import { jobsActions, SkillsMap } from "../store/jobs/jobs.slice";
 import { Skill } from "../store/skills/skills.slice";
-import { statisticsActions } from "../store/statistics/statistics.slice";
+import { addSkills } from "../store/statistics/statistics.action";
 import jobsAdapter from "../utils/jobs.adapter";
 import classes from "./CreateJob.module.scss";
 
@@ -25,7 +25,7 @@ const CreateJob: FC = () => {
   const { nameInput, selectedSkillsMap } = inputs;
   const skills = useSelector((state: RootState) => state.skills.skills);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<TypedDispatch>();
   const navigate = useNavigate();
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -39,9 +39,7 @@ const CreateJob: FC = () => {
       })
     );
 
-    dispatch(
-      statisticsActions.addSkills({ skillsMapToAdd: selectedSkillsMap })
-    );
+    dispatch(addSkills(selectedSkillsMap));
 
     navigate("/");
   };

@@ -9,7 +9,7 @@ type SubSkillsMap = {
   };
 };
 
-type Statistics = {
+export type Statistics = {
   [key: string]: {
     primarySkill: Skill;
     subSkillsMap: SubSkillsMap;
@@ -38,16 +38,24 @@ type RemoveSkillAction = {
   };
 };
 
+type SetStatisticsAction = {
+  type: string;
+  payload: { statistics: Statistics };
+};
+
 const StatisticsSlice = createSlice({
   name: "statistics",
   initialState,
   reducers: {
+    setStatistics(state, action: SetStatisticsAction) {
+      state.statistics = action.payload.statistics;
+    },
     addSkills(state, action: AddSkillAction) {
       const { skillsMapToAdd } = action.payload;
 
       // create primary skill
       Object.keys(skillsMapToAdd).forEach((skillId) => {
-        const skillToAdd = skillsMapToAdd[+skillId];
+        const skillToAdd = skillsMapToAdd[skillId];
         if (!state.statistics[skillId] && skillToAdd) {
           state.statistics[skillId] = {
             primarySkill: skillToAdd,
