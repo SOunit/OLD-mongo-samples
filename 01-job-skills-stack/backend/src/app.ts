@@ -2,6 +2,7 @@ import express from "express";
 import db from "./db";
 import bodyParser from "body-parser";
 import skillsRouter from "./routes/skills";
+import jobsRouter from "./routes/jobs";
 import cors from "cors";
 
 const app = express();
@@ -9,7 +10,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use(skillsRouter);
+app.use("/skills", skillsRouter);
+app.use("/jobs", jobsRouter);
 
 // process.env.PORT come from Heroku
 const PORT = process.env.PORT || 5000;
