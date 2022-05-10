@@ -7,6 +7,7 @@ import { RootState } from "../store";
 import { jobsActions, SkillsMap } from "../store/jobs/jobs.slice";
 import { Skill } from "../store/skills/skills.slice";
 import { statisticsActions } from "../store/statistics/statistics.slice";
+import jobsAdapter from "../utils/jobs.adapter";
 import classes from "./CreateJob.module.scss";
 
 type InitialState = {
@@ -27,16 +28,14 @@ const CreateJob: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const submitHandler: FormEventHandler<HTMLFormElement> = (event) => {
+  const submitHandler: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
 
+    const jobData = { name: nameInput, skillsMap: selectedSkillsMap };
+    const createdJob = await jobsAdapter.createJob(jobData);
     dispatch(
-      jobsActions.createJob({
-        jobData: {
-          _id: Math.random().toString(),
-          name: nameInput,
-          skillsMap: selectedSkillsMap,
-        },
+      jobsActions.addJob({
+        jobData: createdJob,
       })
     );
 

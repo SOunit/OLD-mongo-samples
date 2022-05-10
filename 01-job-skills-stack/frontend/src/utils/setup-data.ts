@@ -30,7 +30,7 @@ export const useSetupData = () => {
   useEffect(() => {
     DUMMY_DATA_LIST.forEach((jobData) => {
       dispatch(
-        jobsActions.createJob({
+        jobsActions.addJob({
           jobData: { ...jobData, _id: Math.random().toString() },
         })
       );

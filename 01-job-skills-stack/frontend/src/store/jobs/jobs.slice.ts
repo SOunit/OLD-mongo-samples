@@ -4,7 +4,7 @@ import { Skill } from "../skills/skills.slice";
 export type SkillsMap = { [key: string]: Skill | null };
 
 export type Job = {
-  _id: string;
+  _id?: string;
   name: string;
   skillsMap: SkillsMap;
 };
@@ -44,7 +44,7 @@ const jobsSlice = createSlice({
       const jobs = action.payload;
       state.jobs = jobs;
     },
-    createJob(state, action: CreateJobAction) {
+    addJob(state, action: CreateJobAction) {
       const { jobData } = action.payload;
       state.jobs.push(jobData);
     },
