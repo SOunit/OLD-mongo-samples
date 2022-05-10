@@ -23,7 +23,7 @@ const _createStaticsWithPrimaryKey = async (
   return statistics;
 };
 
-const _updateSubSkills = (
+const _addSubSkills = (
   skillsMapToAdd: SkillsMap,
   primarySkillId: string,
   statistics: Statistics
@@ -56,7 +56,7 @@ const addSkillsToStatistics = (req: Request, res: Response) => {
       skillsMapToAdd
     );
 
-    const subSkillUpdatedStatistics = _updateSubSkills(
+    const subSkillUpdatedStatistics = _addSubSkills(
       skillsMapToAdd,
       primarySkillId,
       statisticsWithPrimaryKey
@@ -81,6 +81,25 @@ const addSkillsToStatistics = (req: Request, res: Response) => {
   res.json({ message: "statistics updated!" });
 };
 
+const _removeSubSkills = (
+  skillsMapToRemove: SkillsMap,
+  primarySkillId: string,
+  statistics: Statistics
+) => {
+  Object.keys(skillsMapToRemove).forEach((subSkillId) => {
+    if (subSkillId === primarySkillId) {
+      return;
+    }
+
+    statistics.subSkillsMap[subSkillId].count--;
+    if (statistics.subSkillsMap[subSkillId].count < 0) {
+      statistics.subSkillsMap[subSkillId].count = 0;
+    }
+  });
+
+  return statistics;
+};
+
 const getStatisticBySkillId = async (req: Request, res: Response) => {
   const skillId = req?.params?.skillId;
 
@@ -92,4 +111,32 @@ const getStatisticBySkillId = async (req: Request, res: Response) => {
   res.json({ statistics });
 };
 
-export default { addSkillsToStatistics, getStatisticBySkillId };
+const removeSkills = (req: Request, res: Response) => {
+  const skillsMapToRemove = req.body;
+
+  Object.keys(skillsMapToRemove).forEach(async (primarySkillId) => {
+    let statistics = (await db
+      .getDb()
+      .collection("statistics")
+      .findOne({ "primarySkill._id": primarySkillId })) as Statistics;
+
+    const subSKillsUpdatedStatistics = _removeSubSkills(
+      skillsMapToRemove,
+      primarySkillId,
+      statistics
+    );
+
+    console.log("subSKillsUpdatedStatistics", subSKillsUpdatedStatistics);
+
+    db.getDb()
+      .collection("statistics")
+      .updateOne(
+        { "primarySkill._id": primarySkillId },
+        { $set: subSKillsUpdatedStatistics }
+      );
+  });
+
+  res.json({ message: "skills removed" });
+};
+
+export default { addSkillsToStatistics, getStatisticBySkillId, removeSkills };
