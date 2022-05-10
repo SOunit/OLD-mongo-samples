@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import Button from "../components/Button/Button";
+import Button from "../components/button/Button";
 import SkillCard from "../components/skill-card/SkillCard";
 import { RootState } from "../store";
 import { jobsActions } from "../store/jobs/jobs.slice";

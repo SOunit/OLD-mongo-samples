@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FC, FormEventHandler } from "react";
-import Button from "../Button/Button";
+import Button from "../button/Button";
 import classes from "./Form.module.scss";
 
 export type FormInputsState = {
