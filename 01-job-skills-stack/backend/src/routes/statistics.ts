@@ -6,14 +6,13 @@ const router = express.Router();
 
 router.post("/", (req: Request, res: Response) => {
   const skillsMapToAdd = req.body;
-  console.log(skillsMapToAdd);
 
   Object.keys(skillsMapToAdd).forEach(async (primarySkillId) => {
     // create primary key
     let statistics = (await db
       .getDb()
       .collection("statistics")
-      .findOne({ _id: primarySkillId })) as Statistics;
+      .findOne({ "primarySkill._id": primarySkillId })) as Statistics;
 
     if (!statistics) {
       statistics = {
@@ -38,10 +37,28 @@ router.post("/", (req: Request, res: Response) => {
       }
     });
 
-    await db.getDb().collection("statistics").insertOne(statistics);
+    if (statistics._id) {
+      await db
+        .getDb()
+        .collection("statistics")
+        .updateOne({ _id: statistics._id }, { $set: statistics });
+    } else {
+      await db.getDb().collection("statistics").insertOne(statistics);
+    }
   });
 
   res.json(skillsMapToAdd);
+});
+
+router.get("/:skillId", async (req: Request, res: Response) => {
+  const skillId = req?.params?.skillId;
+
+  const statistics = (await db
+    .getDb()
+    .collection("statistics")
+    .findOne({ "primarySkill._id": skillId })) as Statistics;
+
+  res.json({ statistics });
 });
 
 export default router;
