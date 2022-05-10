@@ -126,8 +126,6 @@ const removeSkills = (req: Request, res: Response) => {
       statistics
     );
 
-    console.log("subSKillsUpdatedStatistics", subSKillsUpdatedStatistics);
-
     db.getDb()
       .collection("statistics")
       .updateOne(

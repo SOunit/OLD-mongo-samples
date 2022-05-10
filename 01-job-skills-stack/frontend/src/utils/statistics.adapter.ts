@@ -15,6 +15,17 @@ const fetchStatistics = async (skillId: string) => {
   return response.data.statistics;
 };
 
-const statisticsAdapter = { addSkillsToStatistics, fetchStatistics };
+const removeSkillsFromStatistics = async (skillsMapToRemove: SkillsMap) => {
+  await axios.post(
+    `${process.env.REACT_APP_BACKEND_URL}/statistics/delete`,
+    skillsMapToRemove
+  );
+};
+
+const statisticsAdapter = {
+  addSkillsToStatistics,
+  fetchStatistics,
+  removeSkillsFromStatistics,
+};
 
 export default statisticsAdapter;

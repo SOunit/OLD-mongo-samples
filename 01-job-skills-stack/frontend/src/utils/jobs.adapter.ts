@@ -22,6 +22,10 @@ const getJobs = async (): Promise<Job[]> => {
   return jobs;
 };
 
-const jobsAdapter = { createJob, getJobs };
+const deleteJob = async (jobId: string) => {
+  await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/jobs/${jobId}`);
+};
+
+const jobsAdapter = { createJob, getJobs, deleteJob };
 
 export default jobsAdapter;

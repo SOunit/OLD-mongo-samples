@@ -1,16 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/button/Button";
 import SkillCard from "../components/skill-card/SkillCard";
 import { RootState } from "../store";
-import { jobsActions } from "../store/jobs/jobs.slice";
-import { statisticsActions } from "../store/statistics/statistics.slice";
+import jobsAdapter from "../utils/jobs.adapter";
+import statisticsAdapter from "../utils/statistics.adapter";
 import classes from "./Job.module.scss";
 
 const Job = () => {
   const { jobId } = useParams();
   const jobs = useSelector((state: RootState) => state.jobs.jobs);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   if (!jobId) {
@@ -23,11 +22,9 @@ const Job = () => {
     return <div>Data not found</div>;
   }
 
-  const deleteJobHandler = () => {
-    dispatch(jobsActions.deleteJob({ jobId: jobId }));
-    dispatch(
-      statisticsActions.removeSkill({ skillsMapToRemove: job.skillsMap })
-    );
+  const deleteJobHandler = async () => {
+    await statisticsAdapter.removeSkillsFromStatistics(job.skillsMap);
+    await jobsAdapter.deleteJob(jobId);
 
     navigate("/");
   };
