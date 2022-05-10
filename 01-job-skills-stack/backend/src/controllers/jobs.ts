@@ -34,4 +34,25 @@ const getJobs = async (req: Request, res: Response) => {
   res.status(200).json(jobs);
 };
 
-export default { createJob, getJobs };
+const deleteJob = async (req: Request, res: Response) => {
+  const jobId = req.params.jobId;
+
+  try {
+    const query = { _id: new ObjectId(jobId) };
+
+    const result = await db.getDb().collection("jobs").deleteOne(query);
+
+    if (result && result.deletedCount) {
+      res.status(202).send(`Successfully removed job with id ${jobId}`);
+    } else if (!result) {
+      res.status(400).send(`Failed to remove job with id ${jobId}`);
+    } else if (!result.deletedCount) {
+      res.status(404).send(`Job with id ${jobId} does not exist`);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json(error);
+  }
+};
+
+export default { createJob, getJobs, deleteJob };
