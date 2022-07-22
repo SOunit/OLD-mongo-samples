@@ -1,8 +1,9 @@
-GET http://localhost:5000/statistics/6279a5e957094195e626ac20
+GET http://localhost:5000/statistics/1
 
 ###
 
 POST http://localhost:5000/statistics
+Content-Type: application/json
 
 {
     "1": {

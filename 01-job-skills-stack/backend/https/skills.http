@@ -1,0 +1,14 @@
+GET http://localhost:5000/skills
+
+###
+
+GET http://localhost:5000/skills/6279a5e957094195e626ac20
+
+###
+
+POST http://localhost:5000/skills/new
+Content-Type: application/json
+
+{
+    "skill": {"name": "React"}
+}

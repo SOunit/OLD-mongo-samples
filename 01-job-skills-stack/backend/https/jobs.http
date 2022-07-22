@@ -1,0 +1,20 @@
+GET http://localhost:5000/jobs
+
+###
+
+POST http://localhost:5000/jobs/new
+Content-Type: application/json
+
+{
+    "name": "test",
+    "skillsMap": {
+        "6279a5e957094195e626ac20": {
+            "_id": "6279a5e957094195e626ac20",
+            "name": "React"
+        }
+    }
+}
+
+###
+
+DELETE http://localhost:5000/jobs/627ac18aaa744dd1d1bd947a
