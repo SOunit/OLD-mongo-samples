@@ -1,0 +1,24 @@
+GET http://localhost:5000/statistics/6279a5e957094195e626ac20
+
+###
+
+POST http://localhost:5000/statistics
+
+{
+    "1": {
+        "_id": "1",
+        "name": "1"
+    },
+    "2": {
+        "_id": "2",
+        "name": "2"
+    },
+    "3": {
+        "_id": "3",
+        "name": "3"
+    }
+}
+
+###
+
+POST http://localhost:5000/statistics/delete
